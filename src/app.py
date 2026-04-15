@@ -2,18 +2,19 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 
 st.set_page_config(page_title="Trader Analytics Dashboard", layout="wide")
 
 st.title("Sentiment-Driven Trading Performance Analytics")
 st.markdown("Analyzing how market sentiment influences trader behavior and performance")
 
-# load data
 @st.cache_data
 def load_data():
-    df = pd.read_csv("merged_data.csv")
-    df['date'] = pd.to_datetime(df['date'])
-    return df
+    import os
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(BASE_DIR, "merged_data.csv")
+    return pd.read_csv(file_path)
 
 df = load_data()
 
